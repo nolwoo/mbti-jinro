@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>내 성격유형 결과 옮겨적기 · 학습지</title>
+<style>
+:root{
+  --ink:#0a0a0a; --body-c:#3a3a3a; --sub:#6a6a6a; --line:#cbd5e1;
+  --warn:#f59e0b; --warn-bg:#fff6e0; --warn-ink:#92400e;
+  --surface-card:#f5f0e0;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; font-family:"Apple SD Gothic Neo","Pretendard","Malgun Gothic","Nanum Gothic",sans-serif;
+  color:var(--body-c); line-height:1.45; background:#fff;
+}
+.page{max-width:760px; margin:0 auto; padding:22px 26px 30px;}
+
+.headrow{display:flex; justify-content:space-between; align-items:flex-end;
+         border-bottom:2.5px solid var(--ink); padding-bottom:10px; margin-bottom:14px;}
+.headrow h1{font-size:22px; margin:0; letter-spacing:-.4px; color:var(--ink);}
+.headrow .sub{font-size:12px; color:var(--sub); margin-top:3px;}
+.idbox{display:flex; gap:14px; font-size:12.5px; color:var(--sub); white-space:nowrap;}
+.idbox span{border-bottom:1.3px solid var(--line); padding:0 4px 2px; min-width:46px; display:inline-block;}
+
+.howto{background:var(--warn-bg); border:1.3px solid var(--warn); color:var(--warn-ink);
+       border-radius:9px; padding:8px 12px; font-size:12px; margin-bottom:14px;}
+.howto b{color:#7c2d12;}
+
+h2{font-size:13px; margin:15px 0 7px; color:var(--ink); letter-spacing:.2px;
+   border-left:4px solid var(--ink); padding-left:8px;}
+
+/* 4축 체크 */
+.axisgrid{display:grid; grid-template-columns:1fr 1fr; gap:8px 22px;}
+.axisitem{display:flex; align-items:center; gap:8px; font-size:12.5px;}
+.axisitem .box{width:14px; height:14px; border:1.6px solid var(--ink); border-radius:3px; flex:0 0 auto;}
+.typeboxes{display:flex; gap:8px; margin-top:8px;}
+.typeboxes .cell{width:38px; height:38px; border:1.8px solid var(--ink); border-radius:7px;
+                  display:flex; align-items:center; justify-content:center; font-weight:800; font-size:16px;}
+.typerow{display:flex; align-items:center; gap:10px; margin-top:4px;}
+.typerow .lbl{font-size:12px; color:var(--sub);}
+
+.line{border-bottom:1.3px solid var(--line); height:18px; margin:5px 0;}
+.line.sm{height:15px;}
+
+/* 흥미영역 체크리스트 */
+.areagrid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px 10px;}
+.areaitem{display:flex; align-items:center; gap:6px; font-size:11.8px; border:1.2px solid var(--line);
+          border-radius:7px; padding:6px 8px;}
+.areaitem .box{width:12px; height:12px; border:1.4px solid var(--ink); border-radius:3px; flex:0 0 auto;}
+.areaitem b{font-size:12px;}
+.areaitem span.d{color:var(--sub); font-size:10.5px;}
+
+.twocol{display:grid; grid-template-columns:1fr 1fr; gap:0 26px;}
+
+.box2{border:1.2px solid var(--line); border-radius:9px; padding:10px 12px; background:var(--surface-card);}
+.box2 p{margin:0 0 6px; font-size:11.5px; color:var(--sub);}
+
+.closing{margin-top:16px; border:1.3px solid var(--ink); border-radius:9px; padding:9px 12px; font-size:11.5px;}
+.closing b{color:var(--ink);}
+
+@media print{
+  @page{ size:A4; margin:12mm 14mm; }
+  body{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .page{ max-width:none; padding:0; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="headrow">
+    <div>
+      <h1>내 성격유형 결과 옮겨적기</h1>
+      <div class="sub">태블릿 화면에 나온 내 결과를 보고, 아래 빈칸을 손으로 채워보세요.</div>
+    </div>
+    <div class="idbox">
+      <div>반 <span>&nbsp;</span></div>
+      <div>번호 <span>&nbsp;</span></div>
+      <div>이름 <span style="min-width:74px;">&nbsp;</span></div>
+    </div>
+  </div>
+
+  <div class="howto"><b>이렇게 채워요.</b> 화면에서 굵은 글씨·진한 색으로 강조된 쪽이 "나에게 더 가까운 쪽"이에요.
+  각 줄에서 나에게 더 가까운 네모에 √ 표시하고, 그 알파벳 네 개를 아래 칸에 옮겨 적으세요.</div>
+
+  <h2>① 나의 네 가지 방향</h2>
+  <div class="axisgrid">
+    <div class="axisitem"><span class="box"></span> E &nbsp;밖으로 힘을 얻는다</div>
+    <div class="axisitem"><span class="box"></span> I &nbsp;안에서 힘을 얻는다</div>
+    <div class="axisitem"><span class="box"></span> S &nbsp;눈에 보이는 걸 믿는다</div>
+    <div class="axisitem"><span class="box"></span> N &nbsp;떠오르는 걸 믿는다</div>
+    <div class="axisitem"><span class="box"></span> T &nbsp;이유를 따져본다</div>
+    <div class="axisitem"><span class="box"></span> F &nbsp;마음을 살핀다</div>
+    <div class="axisitem"><span class="box"></span> J &nbsp;계획하고 정리한다</div>
+    <div class="axisitem"><span class="box"></span> P &nbsp;자유롭게 맞춰간다</div>
+  </div>
+  <div class="typerow">
+    <span class="lbl">나의 유형 (√ 한 알파벳 네 개를 순서대로)</span>
+  </div>
+  <div class="typeboxes">
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+  </div>
+
+  <h2>② 내 별명과 잘하는 것</h2>
+  <p style="font-size:11.5px; color:var(--sub); margin:0 0 4px;">화면에 나온 별명을 옮겨 적고, 잘하는 것 세 가지도 그대로 적어보세요.</p>
+  <div class="line"></div>
+  <div class="line sm"></div>
+  <div class="line sm"></div>
+  <div class="line sm"></div>
+
+  <h2>③ 내가 흥미를 느끼는 영역 (화면에 나온 세 가지에 √)</h2>
+  <div class="areagrid">
+    <div class="areaitem"><span class="box"></span><b>실재형</b><span class="d">손으로 만들고 움직이는</span></div>
+    <div class="areaitem"><span class="box"></span><b>탐구형</b><span class="d">파고들어 알아내는</span></div>
+    <div class="areaitem"><span class="box"></span><b>예술형</b><span class="d">상상하고 표현하는</span></div>
+    <div class="areaitem"><span class="box"></span><b>사회형</b><span class="d">사람을 돕고 어울리는</span></div>
+    <div class="areaitem"><span class="box"></span><b>진취형</b><span class="d">이끌고 설득하는</span></div>
+    <div class="areaitem"><span class="box"></span><b>관습형</b><span class="d">정리하고 꼼꼼하게 하는</span></div>
+  </div>
+
+  <div class="twocol" style="margin-top:14px;">
+    <div>
+      <h2 style="margin-top:0;">④ 관심 가는 직업</h2>
+      <div class="box2">
+        <p>화면에 나온 직업들 중, 제일 궁금한 것 두세 가지만 적어보세요.</p>
+        <div class="line sm"></div>
+        <div class="line sm"></div>
+      </div>
+    </div>
+    <div>
+      <h2 style="margin-top:0;">⑤ 이번 주에 해볼 것</h2>
+      <div class="box2">
+        <p>화면에 나온 것 중에서, 이번 주에 진짜로 해볼 한 가지를 골라 적어보세요.</p>
+        <div class="line sm"></div>
+        <div class="line sm"></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>⑥ 더 생각해보기</h2>
+  <p style="font-size:11.5px; color:var(--sub); margin:0 0 4px;">위에서 찾은 직업 중 제일 궁금한 것을 하나 골라, 더 알고 싶은 것 세 가지를 적어보세요.</p>
+  <div class="line sm"></div>
+  <div class="line sm"></div>
+  <div class="line sm"></div>
+
+  <h2>⑦ 활동을 마치고</h2>
+  <p style="font-size:11.5px; color:var(--sub); margin:0 0 4px;">오늘 활동을 하고 나서 느낀 점이나, 더 알아보고 싶은 내용을 자유롭게 적어보세요.</p>
+  <div class="line sm"></div>
+  <div class="line sm"></div>
+  <div class="line sm"></div>
+
+  <div class="closing"><b>기억해요.</b> 성격은 자라면서 얼마든지 바뀌고, 한 사람에게 어울리는 일은 하나가 아니에요.
+  오늘 적은 건 정식 심리검사 결과가 아니라, 나를 알아가는 첫 걸음이에요.</div>
+
+</div>
+</body>
+</html>
