@@ -9,7 +9,6 @@
   /* Clay 디자인 시스템 팔레트 — 크림 캔버스 + 잉크 블랙 CTA + 채도 높은 단색 카드 */
   --ink:#0a0a0a; --body-c:#3a3a3a; --sub:#6a6a6a; --line:#e5e5e5;
   --bg:#fffaf0; --card:#ffffff; --surface-soft:#faf5e8; --surface-card:#f5f0e0;
-  --brand:#0a0a0a;
   --warn:#f59e0b; --warn-bg:#fff6e0; --warn-ink:#92400e;
   --pink:#ff4d8b; --teal:#1a3a3a; --lavender:#b8a4ed; --peach:#ffb084;
   --ochre:#e8b94a; --mint:#a4d4c5; --coral:#ff6b5a;
@@ -44,14 +43,14 @@ p{margin:0 0 12px;}
 .namebox label{display:block; font-size:14px; color:var(--sub); margin-bottom:6px;}
 .namebox input{width:100%; font-size:18px; padding:13px 15px; border:1.5px solid var(--line);
                border-radius:12px; font-family:inherit; background:#fff; color:var(--ink);}
-.namebox input:focus{outline:none; border-color:var(--brand); background:#fff;}
+.namebox input:focus{outline:none; border-color:var(--ink); background:#fff;}
 .namehint{font-size:12.5px; color:var(--sub); margin-top:7px;}
 
 .btn{display:block; width:100%; border:none; border-radius:14px; padding:16px;
      font-size:18px; font-weight:700; font-family:inherit; cursor:pointer;
-     background:var(--brand); color:#fff; transition:transform .06s, filter .15s;}
+     background:var(--ink); color:#fff; transition:transform .06s, filter .15s;}
 .btn:active{transform:scale(.985);}
-.btn.ghost{background:#fff; color:var(--brand); border:1.5px solid var(--brand);}
+.btn.ghost{background:#fff; color:var(--ink); border:1.5px solid var(--ink);}
 .btn.sub{background:var(--surface-card); color:var(--body-c); font-size:15px; padding:12px;}
 .btnrow{display:flex; gap:10px; margin-top:12px;}
 .btnrow .btn{margin:0;}
@@ -60,7 +59,7 @@ p{margin:0 0 12px;}
 .progwrap{margin-bottom:18px;}
 .progtop{display:flex; justify-content:space-between; font-size:13px; color:var(--sub); margin-bottom:7px;}
 .progbar{height:9px; background:var(--line); border-radius:99px; overflow:hidden;}
-.progfill{height:100%; width:0%; background:var(--brand);
+.progfill{height:100%; width:0%; background:var(--ink);
           border-radius:99px; transition:width .3s ease;}
 .qnum{display:inline-block; background:var(--peach); color:var(--ink); font-weight:800;
       font-size:13px; padding:4px 12px; border-radius:99px; margin-bottom:12px;}
@@ -79,7 +78,7 @@ p{margin:0 0 12px;}
                  font-family:inherit; cursor:pointer; text-decoration:underline; padding:8px;}
 
 /* 결과 화면 */
-.typebadge{display:inline-block; background:var(--brand); color:#fff; font-weight:800;
+.typebadge{display:inline-block; background:var(--ink); color:#fff; font-weight:800;
            font-size:15px; letter-spacing:2px; padding:6px 16px; border-radius:99px;}
 .nick{font-size:29px; font-weight:800; margin:12px 0 8px; letter-spacing:-.7px; line-height:1.3; color:var(--ink);}
 .typedesc{font-size:16.5px; color:var(--body-c);}
@@ -657,7 +656,7 @@ var TYPE_ORDER = ["ISTJ","ISFJ","INFJ","INTJ","ISTP","ISFP","INFP","INTP",
                   "ESTP","ESFP","ENFP","ENTP","ESTJ","ESFJ","ENFJ","ENTJ"];
 
 /* ========================= 앱 로직 ========================= */
-var idx = 0, answers = [], userName = "";
+var idx = 0, answers = [], userName = "", inputLocked = false;
 
 var $ = function(id){ return document.getElementById(id); };
 function show(id){
@@ -681,9 +680,14 @@ function renderQuestion(){
 }
 
 function answer(which){
+  /* 같은 자리에 곧바로 다음 문항이 뜨기 때문에, 빠른 더블탭(태블릿에서 흔함)이
+     다음 문항을 읽지도 않고 자동으로 답해버리는 걸 막는다 */
+  if (inputLocked) return;
+  inputLocked = true;
   answers[idx] = which;
   if (idx < QUESTIONS.length - 1){ idx++; renderQuestion(); }
   else { renderResult(); show("screen-result"); }
+  setTimeout(function(){ inputLocked = false; }, 350);
 }
 
 function score(){
@@ -734,7 +738,7 @@ function renderResult(){
   h += '<div class="typebadge">' + type + '</div></div>';
 
   if (d){
-    h += '<div style="text-align:center;"><div class="nick">' + (who ? who + josaEunNeun(who) + ' ' : '') + d.nick + '</div></div>';
+    h += '<div style="text-align:center;"><div class="nick">' + (who ? who + josaEunNeun(userName) + ' ' : '') + d.nick + '</div></div>';
     h += '<p class="typedesc">' + d.desc + '</p>';
   } else {
     h += '<div style="text-align:center;"><div class="nick">' + (who ? who + '의 유형: ' : '') + type + '</div></div>';
@@ -793,7 +797,10 @@ function renderResult(){
   h += '</div>';
 
   $("resultBody").innerHTML = h;
-  document.title = (who ? who + " " : "") + type + " 성격유형 탐험 결과";
+  /* document.title은 HTML이 아니라 순수 텍스트라, innerHTML용으로 이스케이프한
+     who가 아니라 원래 이름(userName)을 그대로 써야 한다 — 안 그러면 이름에
+     &, <, > 가 들어있을 때 탭 제목에 "&gt;" 같은 엔티티 글자가 그대로 보인다 */
+  document.title = (userName ? userName + " " : "") + type + " 성격유형 탐험 결과";
   /* 설명이 아직 없는 초안 유형은 인쇄해봐야 빈 종이가 나오므로 인쇄 버튼을 감춘다 */
   $("printRow").classList.toggle("hidden", !d);
 }
@@ -801,7 +808,7 @@ function renderResult(){
 /* ========================= 이벤트 ========================= */
 $("btnStart").addEventListener("click", function(){
   userName = $("nameInput").value.trim();
-  idx = 0; answers = [];
+  idx = 0; answers = []; inputLocked = false;
   renderQuestion(); show("screen-quiz");
 });
 $("nameInput").addEventListener("keydown", function(e){
@@ -814,7 +821,7 @@ $("btnBack").addEventListener("click", function(){
 });
 $("btnPrint").addEventListener("click", function(){ window.print(); });
 $("btnAgain").addEventListener("click", function(){
-  idx = 0; answers = []; $("nameInput").value = userName;
+  idx = 0; answers = []; inputLocked = false; $("nameInput").value = userName;
   document.title = "나를 알아보는 성격유형 탐험 · 진로 활동";
   show("screen-start");
 });
