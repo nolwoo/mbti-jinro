@@ -59,15 +59,34 @@ h2{font-size:13px; margin:15px 0 7px; color:var(--ink); letter-spacing:.2px;
 .closing{margin-top:16px; border:1.3px solid var(--ink); border-radius:9px; padding:9px 12px; font-size:11.5px;}
 .closing b{color:var(--ink);}
 
+/* 다운로드 툴바 — 인쇄에는 안 나옴 */
+.dltoolbar{display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+  background:#f6f7fb; border:1px solid var(--line); border-radius:11px;
+  padding:11px 14px; margin-bottom:16px; font-size:13px; color:var(--sub);}
+.dltoolbar b{color:var(--ink);}
+.dlbtn{display:inline-flex; align-items:center; gap:6px; text-decoration:none;
+  font-size:13px; font-weight:700; padding:7px 14px; border-radius:999px;}
+.dlbtn.pdf{background:var(--ink); color:#fff;}
+.dlbtn.docx{background:#fff; color:var(--ink); border:1.3px solid var(--ink);}
+.no-print{}
+
 @media print{
   @page{ size:A4; margin:12mm 14mm; }
   body{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   .page{ max-width:none; padding:0; }
+  .no-print{ display:none !important; }
 }
 </style>
 </head>
 <body>
 <div class="page">
+
+  <div class="dltoolbar no-print">
+    <span><b>이 학습지 파일로 받기</b> — 인쇄만 하려면 그냥 Ctrl/⌘+P.</span>
+    <a class="dlbtn pdf" href="worksheet-example.pdf" target="_blank" rel="noopener">📄 PDF 예시 다운로드</a>
+    <a class="dlbtn docx" href="worksheet.docx">📝 Word 파일 다운로드 (직접 수정)</a>
+  </div>
+
 
   <div class="headrow">
     <div>
