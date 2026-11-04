@@ -5,14 +5,19 @@
  *  실행: node check_jobs.js
  */
 const fs = require("fs");
+const vm = require("vm");
 const src = fs.readFileSync(__dirname + "/index.html", "utf8");
 const grab = (name, open, close) => {
   const m = src.match(new RegExp("var " + name + " = (\\" + open + "[\\s\\S]*?\\n\\" + close + ";)"));
   if (!m) { console.error(name + " 를 찾지 못했습니다."); process.exit(1); }
   return m[1];
 };
-eval("var TYPES = " + grab("TYPES", "{", "}"));
-eval("var JOB_AREA = " + grab("JOB_AREA", "{", "}"));
+// index.html에서 잘라낸 객체 리터럴을 eval 대신 별도 컨텍스트에서 평가한다
+// (이 스크립트의 변수·require가 보이지 않고, 1초 넘게 걸리면 중단).
+// 단, Node 문서대로 vm은 보안 경계가 아니다 — 남이 고친 index.html을 검증 없이 돌리지 말 것.
+const literal = (code) => vm.runInNewContext("(" + code.replace(/;\s*$/, "") + ")", Object.create(null), { timeout: 1000 });
+const TYPES = literal(grab("TYPES", "{", "}"));
+const JOB_AREA = literal(grab("JOB_AREA", "{", "}"));
 
 const AREA = { R:"실재형", I:"탐구형", A:"예술형", S:"사회형", E:"진취형", C:"관습형" };
 const areaOf = {};
